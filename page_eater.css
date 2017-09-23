@@ -1,0 +1,34 @@
+/* CSS BITCHES */
+/* SHIT DOG */
+
+body { 
+	/*border: 20px dotted pink; */
+}
+
+.hp #searchform {
+	position: static;
+}
+
+#viewport {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.jhp > #gb {
+	top: 15px;
+}
+
+.content {
+	padding-bottom: 0;
+}
+
+#footer {
+	bottom: initial;
+}
+
+.ctr-p #footer {
+	margin: 311px auto;
+}
+
+
+/* FIXME BACKGROUND COLOR XKCDDDDDDDDD */
