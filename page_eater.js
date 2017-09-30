@@ -1,65 +1,97 @@
+console.log("Getting logo...");
 var doodle = document.getElementById('hplogo');
 
-var doodle_link = doodle.getElementsByTagName('a')[0];
+var xkcd_img = document.createElement("img"); 
 
-var doodle_link_img = doodle_link.getElementsByTagName('img')[0];
+xkcd_img.id = "xkcd_img";
+xkcd_img.src = "https://imgs.xkcd.com/comics/usb_cables.png";
+xkcd_img.title = "Here goes the alt text :D";
 
-// Automatic height
-doodle_link_img.removeAttribute('height');
+doodle.appendChild(xkcd_img);
 
-// FIXME: not the real alt text
-doodle_link_img.title = "WOLOLO";
+fetch('https://cors.now.sh/http://xkcd.com/info.0.json')
+    .then(function(response) { return response.json();
+      })
+    .then(function(json) {
+      xkcd_img.src = json.img;
+      xkcd_img.title = json.alt;
+    });
 
-// FIXME: use the xkcd JSON API to fetch this automatically
-doodle_link_img.src = "https://imgs.xkcd.com/comics/usb_cables.png";
+// Removing garbage styles
+doodle.removeAttribute('onload');
+doodle.removeAttribute('style');
+doodle.removeAttribute('align');
+doodle.removeAttribute('title');
+
+// Removing stupid parent padding
+doodle.parentElement.removeAttribute('style');
+
+
+// TODO: this only worked for the Autumn doodle. Gotta generalize it.
+// console.log("Getting link...");
+// var doodle_link = doodle.getElementsByTagName('a')[0];
+
+// console.log("Getting doodle img...");
+// var doodle_link_img = doodle_link.getElementsByTagName('img')[0];
+
+// // Automatic height
+// console.log("Setting automatic height...");
+// // doodle_link_img.removeAttribute('height');
+
+// // FIXME: not the real alt text
+// console.log("Setting alt text...");
+// // doodle_link_img.title = "WOLOLO";
+
+// // FIXME: use the xkcd JSON API to fetch this automatically
+// console.log("Setting img source...");
+// // doodle_link_img.src = "https://imgs.xkcd.com/comics/usb_cables.png";
 
 // // ---------- Moving things around to fix the page layout XD -----------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // Remove stinky share thing. NOBODY USES THE SHARE THING.
-var stinky_sharer = document.getElementsByClassName('_P7b')[0];
-stinky_sharer.remove();
+console.log("Looking for stinky sharers...");
+var stinky_sharers = document.getElementsByClassName('_P7b');
 
-// Loose search form and insert it after the xkcd doodle
+if(stinky_sharers.length > 0) {
+	for(let sharer of stinky_sharers) {
+		console.log("Removing stinky sharer...");
+		sharer.remove();
+	}
+	console.log("No stinky sharers remaining.");
+}
+else {
+	console.log("Did not find any sharers. Moving on...")
+}
 
-console.log("Getting DOM shit");
-
-var mainList = document.getElementById('viewport');
-var searchForm = document.getElementById('searchform');
-
-console.log("Got DOM shit");
-
-// console.log("Setting static shit");
-
-// searchForm.removeAttribute('position');
-// // searchForm.setAttribute('position', 'static');
-
-// console.log("Done with static shit");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // ALL OF THIS DOESNT WORK
-
-// // console.log("What about top");
-// // searchform.style.top = "1500px";
-// // console.log("Done with top");
-
-// console.log("Setting DOM shit");
-
-// mainList.appendChild(searchform);
-// mainList.insertBefore(mainNode, mainList.childNodes[4]);
-
-// console.log("Setting DOM shit");
-
-
+console.log("Looking for stinky subtexts...");
+var stinky_subtexts = document.getElementsByClassName('logo-subtext');
+if(stinky_subtexts.length > 0) {
+	for(let subtext of stinky_subtexts) {
+		console.log("Removing stinky subtext...");
+		subtext.remove();
+	}
+	console.log("No stinky subtexts remaining.");
+}
+else {
+	console.log("Did not find any subtexts. Moving on...")
+}

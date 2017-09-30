@@ -31,4 +31,29 @@ body {
 }
 
 
+/*
+	This removes the doodle whenever Google uses its normal logo.
+*/
+#hplogo {
+	background: none;
+	height: auto;
+	width: auto;
+}
+
+#_eEe {
+	display: none;
+}
+
+#xkcd_img {
+
+}
+
+/*
+	This hopefully removes everything inside the doodle for special dates
+*/
+#hplogo > a {
+	display: none;
+}
+
+
 /* FIXME BACKGROUND COLOR XKCDDDDDDDDD */
