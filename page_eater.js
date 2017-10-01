@@ -8,24 +8,66 @@ xkcd_img.id = "xkcd_img";
 // xkcd_img.title = "Here goes the alt text :D";
 
 doodle.appendChild(xkcd_img);
-// var myHeaders = new Headers({
-//   'content-type': 'application/json;charset=utf-8'
-// });
 
-// var myInit = { method: 'GET',
-//                headers: myHeaders,
-//                mode: 'cors',
-//                cache: 'default' };
-// // fetch('https://cors.now.sh/http://xkcd.com/info.0.json', myInit).then(function(response) { 
-fetch('https://xkcd.com/info.0.json').then(function(response) { 
-    	console.log("Recieved response from xkcd API!");
-    	return response.json();
-      }).then(function(json) {
-      xkcd_img.src = json.img;
-      xkcd_img.title = json.alt;
-    }).catch(function(error) {
-  console.log('There has been a problem with the fetch operation: ' + error.message);
-});;
+/////////////// USAGE OF SETTINGS /////////////////
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+var display_last_comic = true;
+
+function onGot(settings) {
+ 
+	console.log("Got settings!");
+	display_last_comic = settings.display_last_comic;
+  
+	if(display_last_comic) {
+		console.log("[Setting] Displaying last comic...");
+	}
+	else {
+		console.log("[Setting] Displaying random comic...");
+	}
+
+
+
+	var json_URL = '';
+
+	if(display_last_comic) {
+		json_URL = 'https://xkcd.com/info.0.json';
+	}
+	else {
+		json_URL = 'https://xkcd.com/614/info.0.json';
+	}
+
+	onKnownSetting(json_URL);
+}
+
+console.log("Getting settings...");
+
+var getting_settings = browser.storage.local.get("display_last_comic");
+getting_settings.then(onGot, onError);
+
+
+
+///////////////////////////////////////////////////
+
+
+function onKnownSetting(json_URL) {
+
+	console.log('Downloading comic from:' + json_URL);
+
+	fetch(json_URL).then(function(response) { 
+	    	console.log("Recieved response from xkcd API!");
+	    	return response.json();
+	      }).then(function(json) {
+	      xkcd_img.src = json.img;
+	      xkcd_img.title = json.alt;
+	    }).catch(function(error) {
+	  console.log('There has been a problem with the fetch operation: ' + error.message);
+	});;
+
+}
 
 // Removing garbage styles
 doodle.removeAttribute('onload');

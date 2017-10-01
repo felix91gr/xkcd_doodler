@@ -8,8 +8,8 @@ function saveOptions(e) {
 function restoreOptions() {
 
   function setCurrentChoice(result) {
-    document.querySelector("#rb_last").checked = result;
-    document.querySelector("#rb_random").checked = !result;
+    document.querySelector("#rb_last").checked = result.display_last_comic;
+    document.querySelector("#rb_random").checked = !result.display_last_comic;
   }
 
   function onError(error) {
