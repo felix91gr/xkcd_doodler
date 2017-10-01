@@ -1,5 +1,3 @@
-// Rest of add-on
-
 console.log("Getting logo...");
 var doodle = document.getElementById('hplogo');
 
@@ -20,13 +18,13 @@ doodle.appendChild(xkcd_img);
 //                cache: 'default' };
 // // fetch('https://cors.now.sh/http://xkcd.com/info.0.json', myInit).then(function(response) { 
 fetch('https://xkcd.com/info.0.json').then(function(response) { 
-    	console.log("recieved response");
+    	console.log("Recieved response from xkcd API!");
     	return response.json();
       }).then(function(json) {
       xkcd_img.src = json.img;
       xkcd_img.title = json.alt;
     }).catch(function(error) {
-  console.log('There has been a problem with your fetch operation: ' + error.message);
+  console.log('There has been a problem with the fetch operation: ' + error.message);
 });;
 
 // Removing garbage styles

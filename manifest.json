@@ -6,16 +6,19 @@
 
   "content_scripts": [
     {
-      "matches": ["https://www.google.*"],
+      "matches": ["https://www.google.cl/*"],
       "js": ["page_eater.js"],
       "css": ["page_eater.css"]
     }
   ],
 
   "permissions": [
-    "https://xkcd.com/*"
-  ]
+    "https://xkcd.com/*",
+    "storage"
+  ],
 
 
-
+  "options_ui": {
+    "page": "options.html"
+  }
 }
