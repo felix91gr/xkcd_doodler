@@ -1,21 +1,33 @@
+// Rest of add-on
+
 console.log("Getting logo...");
 var doodle = document.getElementById('hplogo');
 
 var xkcd_img = document.createElement("img"); 
 
 xkcd_img.id = "xkcd_img";
-xkcd_img.src = "https://imgs.xkcd.com/comics/usb_cables.png";
-xkcd_img.title = "Here goes the alt text :D";
+// xkcd_img.src = "https://imgs.xkcd.com/comics/usb_cables.png";
+// xkcd_img.title = "Here goes the alt text :D";
 
 doodle.appendChild(xkcd_img);
+// var myHeaders = new Headers({
+//   'content-type': 'application/json;charset=utf-8'
+// });
 
-fetch('https://cors.now.sh/http://xkcd.com/info.0.json')
-    .then(function(response) { return response.json();
-      })
-    .then(function(json) {
+// var myInit = { method: 'GET',
+//                headers: myHeaders,
+//                mode: 'cors',
+//                cache: 'default' };
+// // fetch('https://cors.now.sh/http://xkcd.com/info.0.json', myInit).then(function(response) { 
+fetch('https://xkcd.com/info.0.json').then(function(response) { 
+    	console.log("recieved response");
+    	return response.json();
+      }).then(function(json) {
       xkcd_img.src = json.img;
       xkcd_img.title = json.alt;
-    });
+    }).catch(function(error) {
+  console.log('There has been a problem with your fetch operation: ' + error.message);
+});;
 
 // Removing garbage styles
 doodle.removeAttribute('onload');

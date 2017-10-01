@@ -1,16 +1,21 @@
 {
 
-  "content_security_policy": "default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://www.google.com",
   "manifest_version": 2,
   "name": "xkcd_doodle",
   "version": "1.0",
 
   "content_scripts": [
     {
-      "matches": ["https://www.google.cl/*"],
+      "matches": ["https://www.google.*"],
       "js": ["page_eater.js"],
       "css": ["page_eater.css"]
     }
+  ],
+
+  "permissions": [
+    "https://xkcd.com/*"
   ]
+
+
 
 }
