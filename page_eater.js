@@ -69,6 +69,10 @@ function onKnownSetting(json_URL) {
 
 }
 
+
+///////////// FIXING GARBAGE STYLES //////////////
+
+
 // Removing garbage styles
 doodle.removeAttribute('onload');
 doodle.removeAttribute('style');
@@ -77,6 +81,17 @@ doodle.removeAttribute('title');
 
 // Removing stupid parent padding
 doodle.parentElement.removeAttribute('style');
+
+// Something
+// FIXME: remember what this was
+var _lga = document.getElementById('lga');
+_lga.removeAttribute('style');
+
+// Stupid blank height above the search bar.
+// Without it, everything is nice and tight.
+document.getElementById('body').childNodes[0].childNodes[1].removeAttribute('style');
+
+//////////////////////////////////////////////////
 
 
 // TODO: this only worked for the Autumn doodle. Gotta generalize it.
