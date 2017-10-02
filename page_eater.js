@@ -15,7 +15,7 @@ function onError(error) {
   console.log(`Error: ${error}`);
 }
 
-var display_last_comic = false;
+var display_last_comic = true;
 function onGot(settings) {
 
 	console.log("Got settings!");
@@ -31,33 +31,27 @@ function onGot(settings) {
 
 
 	var json_URL = '';
-
-	if(display_last_comic) {
-		json_URL = 'https://xkcd.com/info.0.json';
-    onKnownSetting(json_URL);
+  fetch('https://xkcd.com/info.0.json')
+  .then(function(response) {
+  return response.json();
+  })
+  .then(function(json) {
+  var num = json.num;
+  var random_number = Math.floor((Math.random() * num) + 1);; ////Gets a random number for the comic
+  var n_str = random_number.toString();
+  if(display_last_comic) {
+		n_str = num.toString();
 	}
-	else {
-    console.log('real random')
-    fetch('https://xkcd.com/info.0.json')
-    .then(function(response) {
-    return response.json();
-    })
-    .then(function(json) {
-      var num = json.num;
-      var random_number = Math.floor((Math.random() * num) + 1);;
-      var n_str = random_number.toString();
-      var str_URL = 'https://xkcd.com/';
-      var str_URL2 = '/info.0.json';
-      json_URL = str_URL.concat(n_str.concat(str_URL2));
-      onKnownSetting(json_URL);
-    })
-    .catch(function(error) {
-      console.log('There has been a problem with the fetch operation: ' + error.message);
-    })
-	}
-
-
-}
+  var str_URL = 'https://xkcd.com/';
+  var str_URL2 = '/info.0.json';
+	json_URL = str_URL.concat(n_str.concat(str_URL2));
+  console.log('after if');
+  onKnownSetting(json_URL);
+  })
+  .catch(function(error) {
+    console.log('There has been a problem with the fetch operation: ' + error.message);
+  });
+}  /// Final of function onGot
 
 console.log("Getting settings...");
 
