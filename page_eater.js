@@ -1,7 +1,7 @@
 console.log("Getting logo...");
 var doodle = document.getElementById('hplogo');
 
-var xkcd_img = document.createElement("img"); 
+var xkcd_img = document.createElement("img");
 
 xkcd_img.id = "xkcd_img";
 // xkcd_img.src = "https://imgs.xkcd.com/comics/usb_cables.png";
@@ -16,12 +16,11 @@ function onError(error) {
 }
 
 var display_last_comic = true;
-
 function onGot(settings) {
- 
+
 	console.log("Got settings!");
 	display_last_comic = settings.display_last_comic;
-  
+
 	if(display_last_comic) {
 		console.log("[Setting] Displaying last comic...");
 	}
@@ -32,16 +31,27 @@ function onGot(settings) {
 
 
 	var json_URL = '';
-
-	if(display_last_comic) {
-		json_URL = 'https://xkcd.com/info.0.json';
+  fetch('https://xkcd.com/info.0.json')
+  .then(function(response) {
+  return response.json();
+  })
+  .then(function(json) {
+  var num = json.num;
+  var random_number = Math.floor((Math.random() * num) + 1);; ////Gets a random number for the comic
+  var n_str = random_number.toString();
+  if(display_last_comic) {
+		n_str = num.toString();
 	}
-	else {
-		json_URL = 'https://xkcd.com/614/info.0.json';
-	}
-
-	onKnownSetting(json_URL);
-}
+  var str_URL = 'https://xkcd.com/';
+  var str_URL2 = '/info.0.json';
+	json_URL = str_URL.concat(n_str.concat(str_URL2));
+  console.log('after if');
+  onKnownSetting(json_URL);
+  })
+  .catch(function(error) {
+    console.log('There has been a problem with the fetch operation: ' + error.message);
+  });
+}  /// Final of function onGot
 
 console.log("Getting settings...");
 
@@ -54,10 +64,9 @@ getting_settings.then(onGot, onError);
 
 
 function onKnownSetting(json_URL) {
-
+  console.log(json_URL);
 	console.log('Downloading comic from:' + json_URL);
-
-	fetch(json_URL).then(function(response) { 
+	fetch(json_URL).then(function(response) {
 	    	console.log("Recieved response from xkcd API!");
 	    	return response.json();
 	      }).then(function(json) {
