@@ -90,6 +90,9 @@ doodle.removeAttribute('title');
 
 // Removing stupid parent padding
 doodle.parentElement.removeAttribute('style');
+doodle.removeAttribute('src');
+doodle.removeAttribute('srcset');
+doodle.removeAttribute('alt');
 
 // Something
 // FIXME: remember what this was
